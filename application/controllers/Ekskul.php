@@ -1,13 +1,13 @@
 <?php
-class Siswa extends CI_Controller{
+class Ekskul extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->model('m_siswa');
+		$this->load->model('m_ekskul');
 		$this->load->model('m_pengunjung');
 		$this->m_pengunjung->count_visitor();
 	}
 	function index(){
-		$jum=$this->m_siswa->siswa();
+		$jum=$this->m_ekskul->ekskul();
         $page=$this->uri->segment(3);
         if(!$page):
             $offset = 0;
@@ -15,7 +15,7 @@ class Siswa extends CI_Controller{
             $offset = $page;
         endif;
         $limit=8;
-        $config['base_url'] = base_url() . 'siswa/index/';
+        $config['base_url'] = base_url() . 'ekskul/index/';
             $config['total_rows'] = $jum->num_rows();
             $config['per_page'] = $limit;
             $config['uri_segment'] = 3;
@@ -40,8 +40,8 @@ class Siswa extends CI_Controller{
             $config['prev_link'] = '<< Prev';
             $this->pagination->initialize($config);
             $x['page'] =$this->pagination->create_links();
-						$x['data']=$this->m_siswa->siswa_perpage($offset,$limit);
-						$this->load->view('depan/v_siswa',$x);
+						$x['data']=$this->m_ekskul->ekskul_perpage($offset,$limit);
+						$this->load->view('depan/v_ekskul',$x);
 	}
 
 

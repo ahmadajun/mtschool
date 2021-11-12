@@ -73,7 +73,7 @@
                                   <a class="nav-link" href="<?php echo site_url('guru');?>">Guru</a>
                               </li>
                               <li class="nav-item">
-                                  <a class="nav-link" href="<?php echo site_url('siswa');?>">Siswa</a>
+                                  <a class="nav-link" href="<?php echo site_url('ekskul');?>">Ekstra Kulikuler</a>
                               </li>
                               <li class="nav-item">
                                   <a class="nav-link" href="<?php echo site_url('blog');?>">Blog</a>
@@ -108,21 +108,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mb-5">Siswa Kami</h2>
+                    <h2 class="mb-5">Ekstra Kulikuler Kami</h2>
                 </div>
             </div>
             <div class="row">
                 <?php foreach ($data->result() as $row) : ?>
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="admission_insruction">
-                          <?php if(empty($row->siswa_photo)):?>
+                          <?php if(empty($row->ekskul_photo)):?>
                             <img src="<?php echo base_url().'assets/images/blank.png';?>" class="img-fluid" alt="#">
                           <?php else:?>
-                            <img src="<?php echo base_url().'assets/images/'.$row->siswa_photo;?>" class="img-fluid" alt="#">
+                            <img src="<?php echo base_url().'assets/images/'.$row->ekskul_photo;?>" class="img-fluid" alt="#">
                           <?php endif;?>
-                            <p class="text-center mt-3"><span><?php echo $row->siswa_nama;?></span>
-                                <br>
-                                <?php echo $row->kelas_nama;?></p>
+                            <p class="text-center mt-3"><span><?php echo $row->ekskul_nama;?></span>
+                                </p>
                         </div>
                     </div>
                 <?php endforeach;?>
@@ -162,7 +161,7 @@
                   <h3>Akademik</h3>
                   <ul>
                       <li><a href="<?php echo site_url('guru');?>">Guru</a></li>
-                      <li><a href="<?php echo site_url('siswa');?>">Siswa </a></li>
+                      <li><a href="<?php echo site_url('ekskul');?>">Ekstra Kulikuler </a></li>
                       <li><a href="<?php echo site_url('pengumuman');?>">Pengumuman</a></li>
                       <li><a href="<?php echo site_url('agenda');?>">Agenda</a></li>
                       <li><a href="<?php echo site_url('download');?>">Download</a></li>

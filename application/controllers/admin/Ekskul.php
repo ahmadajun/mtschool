@@ -1,25 +1,25 @@
 <?php
-class Siswa extends CI_Controller{
+class ekskul extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		if($this->session->userdata('masuk') !=TRUE){
             $url=base_url('administrator');
             redirect($url);
         };
-		$this->load->model('m_siswa');
+		$this->load->model('m_ekskul');
 		$this->load->model('m_pengguna');
-		$this->load->model('m_kelas');
+		// $this->load->model('m_kelas');
 		$this->load->library('upload');
 	}
 
 
 	function index(){
-		$x['kelas']=$this->m_kelas->get_all_kelas();
-		$x['data']=$this->m_siswa->get_all_siswa();
-		$this->load->view('admin/v_siswa',$x);
+		// $x['kelas']=$this->m_kelas->get_all_kelas();
+		$x['data']=$this->m_ekskul->get_all_ekskul();
+		$this->load->view('admin/v_ekskul',$x);
 	}
 	
-	function simpan_siswa(){
+	function simpan_ekskul(){
 				$config['upload_path'] = './assets/images/'; //path folder
 	            $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
 	            $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
@@ -43,33 +43,33 @@ class Siswa extends CI_Controller{
 	                        $this->image_lib->resize();
 
 	                        $photo=$gbr['file_name'];
-							$nis=strip_tags($this->input->post('xnis'));
+							// $nis=strip_tags($this->input->post('xnis'));
 							$nama=strip_tags($this->input->post('xnama'));
-							$jenkel=strip_tags($this->input->post('xjenkel'));
-							$kelas=strip_tags($this->input->post('xkelas'));
+							// $jenkel=strip_tags($this->input->post('xjenkel'));
+							// $kelas=strip_tags($this->input->post('xkelas'));
 
-							$this->m_siswa->simpan_siswa($nis,$nama,$jenkel,$kelas,$photo);
+							$this->m_ekskul->simpan_ekskul($nama,$photo);
 							echo $this->session->set_flashdata('msg','success');
-							redirect('admin/siswa');
+							redirect('admin/ekskul');
 					}else{
 	                    echo $this->session->set_flashdata('msg','warning');
-	                    redirect('admin/siswa');
+	                    redirect('admin/ekskul');
 	                }
 	                 
 	            }else{
-	            	$nis=strip_tags($this->input->post('xnis'));
+	            	// $nis=strip_tags($this->input->post('xnis'));
 					$nama=strip_tags($this->input->post('xnama'));
-					$jenkel=strip_tags($this->input->post('xjenkel'));
-					$kelas=strip_tags($this->input->post('xkelas'));
+					// $jenkel=strip_tags($this->input->post('xjenkel'));
+					// $kelas=strip_tags($this->input->post('xkelas'));
 
-					$this->m_siswa->simpan_siswa_tanpa_img($nis,$nama,$jenkel,$kelas);
+					$this->m_ekskul->simpan_ekskul_tanpa_img($nama);
 					echo $this->session->set_flashdata('msg','success');
-					redirect('admin/siswa');
+					redirect('admin/ekskul');
 				}
 				
 	}
 	
-	function update_siswa(){
+	function update_ekskul(){
 				
 	            $config['upload_path'] = './assets/images/'; //path folder
 	            $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
@@ -98,42 +98,42 @@ class Siswa extends CI_Controller{
 
 	                        $photo=$gbr['file_name'];
 	                        $kode=$this->input->post('kode');
-							$nis=strip_tags($this->input->post('xnis'));
+							// $nis=strip_tags($this->input->post('xnis'));
 							$nama=strip_tags($this->input->post('xnama'));
-							$jenkel=strip_tags($this->input->post('xjenkel'));
-							$kelas=strip_tags($this->input->post('xkelas'));
+							// $jenkel=strip_tags($this->input->post('xjenkel'));
+							// $kelas=strip_tags($this->input->post('xkelas'));
 
-							$this->m_siswa->update_siswa($kode,$nis,$nama,$jenkel,$kelas,$photo);
+							$this->m_ekskul->update_ekskul($kode,$nama,$photo);
 							echo $this->session->set_flashdata('msg','info');
-							redirect('admin/siswa');
+							redirect('admin/ekskul');
 	                    
 	                }else{
 	                    echo $this->session->set_flashdata('msg','warning');
-	                    redirect('admin/siswa');
+	                    redirect('admin/ekskul');
 	                }
 	                
 	            }else{
 							$kode=$this->input->post('kode');
-							$nis=strip_tags($this->input->post('xnis'));
+							// $nis=strip_tags($this->input->post('xnis'));
 							$nama=strip_tags($this->input->post('xnama'));
-							$jenkel=strip_tags($this->input->post('xjenkel'));
-							$kelas=strip_tags($this->input->post('xkelas'));
+							// $jenkel=strip_tags($this->input->post('xjenkel'));
+							// $kelas=strip_tags($this->input->post('xkelas'));
 
-							$this->m_siswa->update_siswa_tanpa_img($kode,$nis,$nama,$jenkel,$kelas);
+							$this->m_ekskul->update_ekskul_tanpa_img($kode,$nama);
 							echo $this->session->set_flashdata('msg','info');
-							redirect('admin/siswa');
+							redirect('admin/ekskul');
 	            } 
 
 	}
 
-	function hapus_siswa(){
+	function hapus_ekskul(){
 		$kode=$this->input->post('kode');
 		$gambar=$this->input->post('gambar');
 		$path='./assets/images/'.$gambar;
 		unlink($path);
-		$this->m_siswa->hapus_siswa($kode);
+		$this->m_ekskul->hapus_ekskul($kode);
 		echo $this->session->set_flashdata('msg','success-hapus');
-		redirect('admin/siswa');
+		redirect('admin/ekskul');
 	}
 
 }
